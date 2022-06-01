@@ -3,19 +3,21 @@ import axios from "axios";
 
 export default function Main(): JSX.Element {
 
+    const [allData, setAllData] = useState<any[]>() 
+
     const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/"
 
     useEffect(() => {
         async function getAllData() {
             const projects = await axios.get(baseURL + "projects")
-            console.log(projects.data)
             const clients = await axios.get(baseURL + "clients")
-            console.log(clients.data)
             const employees = await axios.get(baseURL + "employees")
-            console.log(employees.data)
+            const mergedData = [projects.data, clients.data, employees.data]
+            setAllData(mergedData)
         }
         getAllData()
     }, []) 
+
 
   return (<>
   
