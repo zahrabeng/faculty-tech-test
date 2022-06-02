@@ -5,6 +5,7 @@ import { project } from "../utils/Interfaces";
 import { client } from "../utils/Interfaces";
 import { employees } from "../utils/Interfaces";
 import { singleProject } from "../utils/Interfaces";
+import { mergedData } from "../utils/Interfaces";
 
 import Header from "./Header";
 import Table from "./Table";
@@ -22,7 +23,7 @@ const reducer = (state: singleProject[], action: any) => {
     case "Employee": {
       const employees = state.filter((project) => project.employees.length > 0);
       return employees.filter((project) =>
-        project.employees[0].includes(action.payload.search)
+        project.employees[0]!.includes(action.payload.search)
       );
     }
 
@@ -43,15 +44,16 @@ const reducer = (state: singleProject[], action: any) => {
 
     default:
     case "initial_data":
-      return action.payload;
+      return action.payload; 
   }
 };
-
-interface setClientId{
-  setClientId: React.Dispatch<React.SetStateAction<string>>
-}
  
-export default function Main(props: setClientId): JSX.Element {
+interface iProps {
+  setClientId: React.Dispatch<React.SetStateAction<string>>;
+  setMergedData: React.Dispatch<React.SetStateAction<mergedData | undefined>>
+}
+
+export default function Main(props:  iProps): JSX.Element {
   const [filteredData, dispatch] = useReducer(reducer, []);
   const [searchText, setSearchText] = useState("");
   const [selector, setSelector] = useState("Search By...");
@@ -68,11 +70,13 @@ export default function Main(props: setClientId): JSX.Element {
       const projects = await axios.get(baseURL + "projects");
       const clients = await axios.get(baseURL + "clients");
       const employees = await axios.get(baseURL + "employees");
-      const mergedData = {
+      const mergedData:mergedData = {
         projects: projects.data,
         clients: clients.data,
         employees: employees.data,
       };
+      props.setMergedData(mergedData) 
+
       const reformattedData: singleProject[] = [];
       mergedData.projects.map((project: project) => {
         const client = mergedData.clients.find(
@@ -129,8 +133,7 @@ export default function Main(props: setClientId): JSX.Element {
             Search
           </button>
         )}
-        <Table data={filteredData} 
-        setClientId = {props.setClientId}/>
+        <Table data={filteredData} setClientId={props.setClientId} />
       </div>
     </>
   );
