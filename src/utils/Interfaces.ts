@@ -1,6 +1,7 @@
 export interface singleProject {
   projectId: string;
   client: string;
+  clientId: string;
   employees: string[];
   startDate: string;
   endDate: string;

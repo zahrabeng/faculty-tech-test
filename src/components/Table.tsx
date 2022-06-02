@@ -1,11 +1,15 @@
 import { singleProject } from "../utils/Interfaces";
 import { employeeLength } from "../utils/employeeLength";
+import {useNavigate} from 'react-router-dom';
 
 interface iProps {
   data: singleProject[];
+  setClientId: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function Table(props: iProps): JSX.Element {
+  const navigate = useNavigate()
+  
   return (
     <>
       {console.log(props.data)}
@@ -22,7 +26,7 @@ export default function Table(props: iProps): JSX.Element {
             </tr>
             <tr>
               <td>{project.projectId}</td>
-              <td>{project.client}</td>
+              <td onClick={()=>props.setClientId(project.clientId) }>{project.client}</td>
               <td>
                 {employeeLength(project.employees)
                   ? project.employees.map((employee, id) => (

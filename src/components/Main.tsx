@@ -47,7 +47,11 @@ const reducer = (state: singleProject[], action: any) => {
   }
 };
 
-export default function Main(): JSX.Element {
+interface setClientId{
+  setClientId: React.Dispatch<React.SetStateAction<string>>
+}
+ 
+export default function Main(props: setClientId): JSX.Element {
   const [filteredData, dispatch] = useReducer(reducer, []);
   const [searchText, setSearchText] = useState("");
   const [selector, setSelector] = useState("Search By...");
@@ -84,6 +88,7 @@ export default function Main(): JSX.Element {
         reformattedData.push({
           projectId: project.id,
           client: client!.name,
+          clientId: project.clientId,
           employees: singleProject,
           startDate: project.contract.startDate,
           endDate: project.contract.endDate,
@@ -124,7 +129,8 @@ export default function Main(): JSX.Element {
             Search
           </button>
         )}
-        <Table data={filteredData} />
+        <Table data={filteredData} 
+        setClientId = {props.setClientId}/>
       </div>
     </>
   );

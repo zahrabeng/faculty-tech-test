@@ -1,12 +1,17 @@
 import Main from "./components/Main";
+import { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 function App(): JSX.Element {
+  const [clientId, setClientId] = useState<string>("")
+  {console.log(clientId)}
   return (
+   
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />}></Route>
+          <Route path="/" element={<Main setClientId={setClientId}/>}></Route>
+          <Route path={`/clients/${clientId}`} element={}></Route>
         </Routes>
       </BrowserRouter>
     </>
