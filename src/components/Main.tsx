@@ -6,7 +6,7 @@ import { singleProject } from "../utils/Interfaces";
 import { employeeLength } from "../utils/employeeLength";
 import Header from "./Header";
 
-const reformattedData: singleProject[] = [];
+
 
 const reducer = (state:singleProject[], action:any) => {
   switch (action.type) {
@@ -19,6 +19,7 @@ const reducer = (state:singleProject[], action:any) => {
 };
 
 export default function Main(): JSX.Element {
+  const reformattedData: singleProject[] = [];
   const [allData, setAllData] = useState<mergedData>();
   const [filteredData, dispatch] = useReducer(reducer, reformattedData);
 
@@ -39,7 +40,7 @@ export default function Main(): JSX.Element {
     getAllData();
   }, []);
 
-
+console.log(reformattedData)
 
 
   if (allData) {
@@ -66,9 +67,7 @@ export default function Main(): JSX.Element {
     });
   }
 
-  console.log(reformattedData.map((data)=> data))
 
-  console.log(reformattedData)
   return (
     <>
       <Header />
@@ -85,7 +84,7 @@ export default function Main(): JSX.Element {
         </select>
         </div>
       {/* add below into component later */}
-        {reformattedData.slice(0, 100).map((project) => (
+        {reformattedData.map((project) => (
           <div key={project.projectId} className="data-table">
             <table>
               <tr>
