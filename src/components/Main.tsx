@@ -41,7 +41,7 @@ const reducer = (state: singleProject[], action: any) => {
 export default function Main(): JSX.Element {
   const [filteredData, dispatch] = useReducer(reducer, []);
   const [searchText, setSearchText] = useState("")
-  const [selector, setSelector] = useState("Search By All")
+  const [selector, setSelector] = useState("Search By...")
   const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/";
 
 
@@ -97,7 +97,7 @@ console.log(filteredData.filter((project:singleProject) => project.employees.len
       <Header />
       <div className="search-container">
         <input onChange={(e) => setSearchText(e.target.value)}></input>
-        <select onChange={(e) => setSelector(e.target.value)}>
+        <select onChange={(e) => setSelector(e.target.value)} value = {selector}>
           <option>Search By...</option>
           <option>Client</option>
           <option>Employee</option>
@@ -105,7 +105,7 @@ console.log(filteredData.filter((project:singleProject) => project.employees.len
           <option>End Date</option>
           <option>Size</option>
         </select>
-        <button onClick={()=> dispatch({type: selector, payload:{search:searchText}})}>Search</button>
+        { selector !== "Search By..." && <button onClick={()=> dispatch({type: selector, payload:{search:searchText}})}>Search</button>}
       </div>
       {/* add below into component later */}
       {filteredData.map((project: singleProject) => (
