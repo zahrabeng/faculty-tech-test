@@ -24,27 +24,32 @@ export default function Main(): JSX.Element {
     getAllData();
   }, []);
 
-
-
+  const reformattedData: any = [];
   if (allData) {
     allData.projects.forEach((project) => {
       const client = allData.clients.find(
         (client) => client.id === project.clientId
       );
-    console.log("This is a Client", client?.name);
-      
-        if (project.employeeIds) {
-          for (const employeeId of project.employeeIds) {
-            const employees = allData.employees.find((employee) => employeeId === employee.id);
-            console.log("This is an Employee", employees?.name)
-
-        }
-    }
-    
+      //console.log("This is a Client", client?.name);
+      const singleProject = [];
+      for (const employeeId of project.employeeIds) {
+        const employee = allData.employees.find(
+          (employee) => employeeId === employee.id
+        );
+        singleProject.push(employee?.name);
+      }
+      //   console.log(singleProject);
+      reformattedData.push({
+        client: client?.name,
+        employees: singleProject,
+        startDate: project.contract.startDate,
+        endDate: project.contract.endDate,
+        size: project.contract.size,
+      });
     });
   }
 
-
+  console.log(reformattedData);
 
   return (
     <>
@@ -53,6 +58,7 @@ export default function Main(): JSX.Element {
       <div className="search-container">
         <input></input>
       </div>
+
     </>
   );
 }
