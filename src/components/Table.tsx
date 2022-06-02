@@ -1,14 +1,14 @@
 import { singleProject } from "../utils/Interfaces";
 import { employeeLength } from "../utils/employeeLength";
 
-interface iProps{
-  data: singleProject[]
+interface iProps {
+  data: singleProject[];
 }
 
-export default function Table(props:iProps): JSX.Element {
+export default function Table(props: iProps): JSX.Element {
   return (
     <>
-    {console.log(props.data)}
+      {console.log(props.data)}
       {props.data.map((project: singleProject) => (
         <div key={project.projectId} className="data-table">
           <table>
@@ -36,7 +36,7 @@ export default function Table(props:iProps): JSX.Element {
             </tr>
           </table>
         </div>
-      ))} 
+      ))}
     </>
   );
 }

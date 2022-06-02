@@ -1,4 +1,3 @@
-
 export interface singleProject {
   projectId: string;
   client: string;
