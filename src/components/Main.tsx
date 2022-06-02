@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
 import { mergedData } from "../utils/Interfaces";
@@ -6,8 +6,21 @@ import { singleProject } from "../utils/Interfaces";
 import { employeeLength } from "../utils/employeeLength";
 import Header from "./Header";
 
+const reformattedData: singleProject[] = [];
+
+const reducer = (state:singleProject[], action:any) => {
+  switch (action.type) {
+    case "Client":
+    
+     
+    default:
+      return state;
+  }
+};
+
 export default function Main(): JSX.Element {
   const [allData, setAllData] = useState<mergedData>();
+  const [filteredData, dispatch] = useReducer(reducer, reformattedData);
 
   const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/";
 
@@ -26,9 +39,11 @@ export default function Main(): JSX.Element {
     getAllData();
   }, []);
 
-  const reformattedData: singleProject[] = [];
+
+
+
   if (allData) {
-    allData.projects.forEach((project) => {
+    allData.projects.map((project) => {
       const client = allData.clients.find(
         (client) => client.id === project.clientId
       );
@@ -47,18 +62,30 @@ export default function Main(): JSX.Element {
         endDate: project.contract.endDate,
         size: project.contract.size,
       });
+
     });
   }
 
-  console.log(reformattedData);
+  console.log(reformattedData.map((data)=> data))
 
+  console.log(reformattedData)
   return (
     <>
       <Header />
       <div className="search-container">
         <input></input>
+
+        <select onChange={(e) => {dispatch({type: e.target.value})}}>
+        <option>Search By All</option>
+        <option>Client</option>
+        <option>Employee</option>
+        <option>Start Date</option>
+        <option>End Date</option>
+        <option>Size</option>
+        </select>
         </div>
-        {reformattedData.map((project) => (
+      {/* add below into component later */}
+        {reformattedData.slice(0, 100).map((project) => (
           <div key={project.projectId} className="data-table">
             <table>
               <tr>
