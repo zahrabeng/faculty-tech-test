@@ -2,6 +2,9 @@ import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 
 import { mergedData } from "../utils/Interfaces";
+import { project } from "../utils/Interfaces";
+import { client } from "../utils/Interfaces";
+import { employees } from "../utils/Interfaces";
 import { singleProject } from "../utils/Interfaces";
 import { employeeLength } from "../utils/employeeLength";
 import Header from "./Header";
@@ -10,19 +13,19 @@ import Header from "./Header";
 
 const reducer = (state:singleProject[], action:any) => {
   switch (action.type) {
-    case {}:
-     
+    case "initial_data":
+     return action.payload
+
     default:
-      return state;
+      case "initial_data":
+        return action.payload
   }
  
 };
 
 export default function Main(): JSX.Element {
-  const reformattedData: singleProject[] = [];
 
-  const [allData, setAllData] = useState<mergedData>();
-  const [filteredData, dispatch] = useReducer(reducer, reformattedData);
+  const [filteredData, dispatch] = useReducer(reducer, []);
 
   const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/";
 
@@ -36,36 +39,62 @@ export default function Main(): JSX.Element {
         clients: clients.data,
         employees: employees.data,
       };
-      setAllData(mergedData);
+      const reformattedData: singleProject[] = [];
+      mergedData.projects.map((project: project) => {
+        const client = mergedData.clients.find(
+          (client:client) => client.id === project.clientId
+        );
+        const singleProject = [];
+        for (const employeeId of project.employeeIds) {
+          const employee = mergedData.employees.find(
+            (employee:employees) => employeeId === employee.id
+          );
+          singleProject.push(employee?.name);
+        }
+        reformattedData.push({
+          projectId: project.id,
+          client: client!.name,
+          employees: singleProject, 
+          startDate: project.contract.startDate,
+          endDate: project.contract.endDate,
+          size: project.contract.size,
+        });
+  
+      })
+      dispatch({
+        type: "initial_data",
+        payload: reformattedData,
+      });
     }
+
     getAllData();
   }, []);
 
+console.log(filteredData, "this is filtered data")
+  
+  // if (allData) {
+    // allData.projects.map((project) => {
+    //   const client = allData.clients.find(
+    //     (client) => client.id === project.clientId
+    //   );
+    //   const singleProject = [];
+    //   for (const employeeId of project.employeeIds) {
+    //     const employee = allData.employees.find(
+    //       (employee) => employeeId === employee.id
+    //     );
+    //     singleProject.push(employee?.name);
+    //   }
+    //   reformattedData.push({
+    //     projectId: project.id,
+    //     client: client!.name,
+    //     employees: singleProject,
+    //     startDate: project.contract.startDate,
+    //     endDate: project.contract.endDate,
+    //     size: project.contract.size,
+    //   });
 
-
-  if (allData) {
-    allData.projects.map((project) => {
-      const client = allData.clients.find(
-        (client) => client.id === project.clientId
-      );
-      const singleProject = [];
-      for (const employeeId of project.employeeIds) {
-        const employee = allData.employees.find(
-          (employee) => employeeId === employee.id
-        );
-        singleProject.push(employee?.name);
-      }
-      reformattedData.push({
-        projectId: project.id,
-        client: client!.name,
-        employees: singleProject,
-        startDate: project.contract.startDate,
-        endDate: project.contract.endDate,
-        size: project.contract.size,
-      });
-
-    });
-  }
+    // });
+  // }
 
 
   return (
@@ -84,7 +113,7 @@ export default function Main(): JSX.Element {
         </select>
         </div>
       {/* add below into component later */}
-        {reformattedData.map((project) => (
+        {filteredData.map((project: singleProject) => ( 
           <div key={project.projectId} className="data-table">
             <table>
               <tr>
@@ -103,7 +132,7 @@ export default function Main(): JSX.Element {
                     project.employees.map((employee, id) => (
                       <li key={id}>{employee}</li>
                     ))
-                  ) : ( 
+                  ) : (  
                    "None"
                   )}
                 </td>
