@@ -1,6 +1,8 @@
-import Main from "./components/Main";
 import { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+
+import Main from "./components/Main";
+import ClientPage from "./components/ClientPage";
 
 function App(): JSX.Element {
   const [clientId, setClientId] = useState<string>("")
@@ -11,7 +13,7 @@ function App(): JSX.Element {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main setClientId={setClientId}/>}></Route>
-          <Route path={`/clients/${clientId}`} element={}></Route>
+          <Route path={`/clients/${clientId}`} element={<ClientPage clientId = {clientId}/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

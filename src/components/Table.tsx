@@ -26,7 +26,7 @@ export default function Table(props: iProps): JSX.Element {
             </tr>
             <tr>
               <td>{project.projectId}</td>
-              <td onClick={()=>props.setClientId(project.clientId) }>{project.client}</td>
+              <td onClick={()=>{props.setClientId(project.clientId); navigate(`/clients/${project.clientId}`)} }>{project.client}</td>
               <td>
                 {employeeLength(project.employees)
                   ? project.employees.map((employee, id) => (
