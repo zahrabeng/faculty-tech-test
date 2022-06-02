@@ -13,8 +13,8 @@ const reducer = (state: singleProject[], action: any) => {
     case "initial_data":
       return action.payload;
     
-    case "Client":
-        return state.filter((project) => project.client.includes(action.payload.search));
+  case "Client":
+      return state.filter((project) => project.client.includes(action.payload.search));
       
         
   case "Employee":{
@@ -22,6 +22,16 @@ const reducer = (state: singleProject[], action: any) => {
         return employees.filter((project) => project.employees[0].includes(action.payload.search));
 }
  
+  case "Start Date":
+    return state.filter((project) => project.startDate.includes(action.payload.search));
+
+    case "End Date":
+    return state.filter((project) => project.endDate.includes(action.payload.search));
+
+    case "Size":
+      return state.filter((project) => project.size.includes(action.payload.search));
+  
+
     default:
       case "initial_data":
       return action.payload;
@@ -88,7 +98,7 @@ console.log(filteredData.filter((project:singleProject) => project.employees.len
       <div className="search-container">
         <input onChange={(e) => setSearchText(e.target.value)}></input>
         <select onChange={(e) => setSelector(e.target.value)}>
-          <option>Search By All</option>
+          <option>Search By...</option>
           <option>Client</option>
           <option>Employee</option>
           <option>Start Date</option>
