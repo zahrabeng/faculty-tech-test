@@ -17,9 +17,11 @@ const reducer = (state: singleProject[], action: any) => {
         return state.filter((project) => project.client.includes(action.payload.search));
       
         
-    case "Client":
-        return state.filter((project) => project.client.includes(action.payload.search));
-    
+  case "Employee":{
+        const employees = state.filter((project) => project.employees.length > 0)
+        return employees.filter((project) => project.employees[0].includes(action.payload.search));
+}
+ 
     default:
       case "initial_data":
       return action.payload;
@@ -31,6 +33,10 @@ export default function Main(): JSX.Element {
   const [searchText, setSearchText] = useState("")
   const [selector, setSelector] = useState("Search By All")
   const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/";
+
+
+console.log(filteredData.filter((project:singleProject) => project.employees.length > 0))
+ 
 
   useEffect(() => {
     async function getAllData() {
@@ -73,7 +79,8 @@ export default function Main(): JSX.Element {
   }, [searchText]);
 
   console.log(selector)
-  console.log(filteredData, "this is filtered data");
+ console.log(filteredData, "this is filtered data");
+
 
   return (
     <>

@@ -31,7 +31,7 @@ export interface mergedData {
 export interface singleProject {
   projectId: string;
   client: string;
-  employees: (string | undefined)[];
+  employees: string [];
   startDate: string;
   endDate: string;
   size: string;
