@@ -55,11 +55,11 @@ export default function Main(): JSX.Element {
   return (
     <>
       <Header />
-      <br />
       <div className="search-container">
         <input></input>
+        </div>
         {reformattedData.map((project) => (
-          <div key={project.projectId}>
+          <div key={project.projectId} className="data-table">
             <table>
               <tr>
                 <th>Project ID</th>
@@ -68,24 +68,26 @@ export default function Main(): JSX.Element {
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Size</th>
-              </tr>
+              </tr> 
               <tr>
                 <td>{project.projectId}</td>
                 <td>{project.client}</td>
                 <td>
-                  {project.employees ? (
+                  {employeeLength(project.employees) ? (
                     project.employees.map((employee, id) => (
                       <li key={id}>{employee}</li>
                     ))
-                  ) : (
-                   "none"
+                  ) : ( 
+                   "None"
                   )}
                 </td>
+                <td>{project.startDate}</td>
+                <td>{project.endDate}</td>
+                <td>{project.size}</td>
               </tr>
             </table>
           </div>
         ))}
-      </div>
     </>
   );
 }

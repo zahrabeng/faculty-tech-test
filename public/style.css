@@ -1,0 +1,27 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.data-table{
+    width: 90%;
+    /* border: 1px solid; */
+    padding: auto;
+    margin: 20px auto ;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #12565f;
+    color: rgb(255, 255, 255);
+    width: 20%;
+    
+  }
+
+tr{
+    background-color: #ebe8e8;
+    padding: 10%;
+    
+} 
+
