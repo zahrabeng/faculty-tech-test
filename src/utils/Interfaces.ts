@@ -39,21 +39,21 @@ export interface singleProject {
 
 export interface project {
   id: string;
-      clientId: string;
-      employeeIds: string[];
-      contract: {
-        startDate: string;
-        endDate: string;
-        size: string;
-      };
+  clientId: string;
+  employeeIds: string[];
+  contract: {
+    startDate: string;
+    endDate: string;
+    size: string;
+  };
 }
 
-export interface client{
+export interface client {
   id: string;
   name: string;
 }
 
-export interface employees{
+export interface employees {
   id: string;
   name: string;
   role: string;
