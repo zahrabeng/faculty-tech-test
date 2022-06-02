@@ -10,16 +10,17 @@ import Header from "./Header";
 
 const reducer = (state:singleProject[], action:any) => {
   switch (action.type) {
-    case "Client":
-    
+    case {}:
      
     default:
       return state;
   }
+ 
 };
 
 export default function Main(): JSX.Element {
   const reformattedData: singleProject[] = [];
+
   const [allData, setAllData] = useState<mergedData>();
   const [filteredData, dispatch] = useReducer(reducer, reformattedData);
 
@@ -40,7 +41,6 @@ export default function Main(): JSX.Element {
     getAllData();
   }, []);
 
-console.log(reformattedData)
 
 
   if (allData) {
@@ -74,7 +74,7 @@ console.log(reformattedData)
       <div className="search-container">
         <input></input>
 
-        <select onChange={(e) => {dispatch({type: e.target.value})}}>
+        <select onChange={(e) => dispatch({type:e.target.value})}> 
         <option>Search By All</option>
         <option>Client</option>
         <option>Employee</option>
