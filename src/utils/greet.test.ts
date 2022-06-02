@@ -1,4 +1,4 @@
-import { greet } from "./greet";
+import { greet } from "./employeeLength";
 
 test("greet returns a string, greeting the passed name", () => {
   expect(greet("World")).toBe("Hello, World!");

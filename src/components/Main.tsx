@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { mergedData } from "../utils/Interfaces";
+import { singleProject } from "../utils/Interfaces";
+import { employeeLength } from "../utils/employeeLength";
 import Header from "./Header";
 
 export default function Main(): JSX.Element {
@@ -24,13 +26,12 @@ export default function Main(): JSX.Element {
     getAllData();
   }, []);
 
-  const reformattedData: any = [];
+  const reformattedData: singleProject[] = [];
   if (allData) {
     allData.projects.forEach((project) => {
       const client = allData.clients.find(
         (client) => client.id === project.clientId
       );
-      //console.log("This is a Client", client?.name);
       const singleProject = [];
       for (const employeeId of project.employeeIds) {
         const employee = allData.employees.find(
@@ -38,9 +39,9 @@ export default function Main(): JSX.Element {
         );
         singleProject.push(employee?.name);
       }
-      //   console.log(singleProject);
       reformattedData.push({
-        client: client?.name,
+        projectId: project.id,
+        client: client!.name,
         employees: singleProject,
         startDate: project.contract.startDate,
         endDate: project.contract.endDate,
@@ -57,8 +58,34 @@ export default function Main(): JSX.Element {
       <br />
       <div className="search-container">
         <input></input>
+        {reformattedData.map((project) => (
+          <div key={project.projectId}>
+            <table>
+              <tr>
+                <th>Project ID</th>
+                <th>Client</th>
+                <th>Employees</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Size</th>
+              </tr>
+              <tr>
+                <td>{project.projectId}</td>
+                <td>{project.client}</td>
+                <td>
+                  {project.employees ? (
+                    project.employees.map((employee, id) => (
+                      <li key={id}>{employee}</li>
+                    ))
+                  ) : (
+                   "none"
+                  )}
+                </td>
+              </tr>
+            </table>
+          </div>
+        ))}
       </div>
-
     </>
   );
 }
