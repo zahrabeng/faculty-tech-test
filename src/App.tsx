@@ -7,17 +7,22 @@ import ClientPage from "./components/ClientPage";
 
 function App(): JSX.Element {
   const [clientId, setClientId] = useState<string>("");
-  const [mergedData, setMergedData] = useState<mergedData | undefined>()
+  const [mergedData, setMergedData] = useState<mergedData | undefined>();
 
-  console.log("This is merged", mergedData)
+  console.log("This is merged", mergedData);
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main setClientId={setClientId} setMergedData = {setMergedData}/>}></Route>
+          <Route
+            path="/"
+            element={
+              <Main setClientId={setClientId} setMergedData={setMergedData} />
+            }
+          ></Route>
           <Route
             path={`/clients/${clientId}`}
-            element={<ClientPage clientId={clientId} mergedData = {mergedData} />}
+            element={<ClientPage clientId={clientId} mergedData={mergedData} />}
           ></Route>
         </Routes>
       </BrowserRouter>

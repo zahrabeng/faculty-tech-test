@@ -44,16 +44,16 @@ const reducer = (state: singleProject[], action: any) => {
 
     default:
     case "initial_data":
-      return action.payload; 
+      return action.payload;
   }
 };
- 
+
 interface iProps {
   setClientId: React.Dispatch<React.SetStateAction<string>>;
-  setMergedData: React.Dispatch<React.SetStateAction<mergedData | undefined>>
+  setMergedData: React.Dispatch<React.SetStateAction<mergedData | undefined>>;
 }
 
-export default function Main(props:  iProps): JSX.Element {
+export default function Main(props: iProps): JSX.Element {
   const [filteredData, dispatch] = useReducer(reducer, []);
   const [searchText, setSearchText] = useState("");
   const [selector, setSelector] = useState("Search By...");
@@ -70,12 +70,12 @@ export default function Main(props:  iProps): JSX.Element {
       const projects = await axios.get(baseURL + "projects");
       const clients = await axios.get(baseURL + "clients");
       const employees = await axios.get(baseURL + "employees");
-      const mergedData:mergedData = {
+      const mergedData: mergedData = {
         projects: projects.data,
         clients: clients.data,
         employees: employees.data,
       };
-      props.setMergedData(mergedData) 
+      props.setMergedData(mergedData);
 
       const reformattedData: singleProject[] = [];
       mergedData.projects.map((project: project) => {
