@@ -51,7 +51,7 @@ const reducer = (state: singleProject[], action: any) => {
 interface iProps {
   setClientId: React.Dispatch<React.SetStateAction<string>>;
   setMergedData: React.Dispatch<React.SetStateAction<mergedData | undefined>>;
-  setEmployeeId: React.Dispatch<React.SetStateAction<string>>
+  setEmployeeId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function Main(props: iProps): JSX.Element {
@@ -59,7 +59,6 @@ export default function Main(props: iProps): JSX.Element {
   const [searchText, setSearchText] = useState("");
   const [selector, setSelector] = useState("Search By...");
   const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/";
-
 
   useEffect(() => {
     async function getAllData() {
@@ -83,12 +82,12 @@ export default function Main(props: iProps): JSX.Element {
           const employee = mergedData.employees.find(
             (employee: employees) => employeeId === employee.id
           );
-          singleProject.push({id: employeeId, name:employee!.name}); 
+          singleProject.push({ id: employeeId, name: employee!.name });
         }
         reformattedData.push({
           projectId: project.id,
           client: client!.name,
-          clientId: project.clientId, 
+          clientId: project.clientId,
           employees: singleProject,
           startDate: project.contract.startDate,
           endDate: project.contract.endDate,
@@ -129,7 +128,11 @@ export default function Main(props: iProps): JSX.Element {
             Search
           </button>
         )}
-        <Table data={filteredData} setClientId={props.setClientId} setEmployeeId = {props.setEmployeeId}/>
+        <Table
+          data={filteredData}
+          setClientId={props.setClientId}
+          setEmployeeId={props.setEmployeeId}
+        />
       </div>
     </>
   );

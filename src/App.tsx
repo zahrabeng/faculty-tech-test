@@ -19,7 +19,11 @@ function App(): JSX.Element {
           <Route
             path="/"
             element={
-              <Main setClientId={setClientId} setMergedData={setMergedData} setEmployeeId = {setEmployeeId} />
+              <Main
+                setClientId={setClientId}
+                setMergedData={setMergedData}
+                setEmployeeId={setEmployeeId}
+              />
             }
           ></Route>
           <Route
@@ -27,10 +31,11 @@ function App(): JSX.Element {
             element={<ClientPage clientId={clientId} mergedData={mergedData} />}
           ></Route>
           <Route
-          path={`/employees/${employeeId}`}
-          element={<EmployeePage employeeId={employeeId} mergedData = {mergedData}/>}
-          >
-          </Route>
+            path={`/employees/${employeeId}`}
+            element={
+              <EmployeePage employeeId={employeeId} mergedData={mergedData} />
+            }
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>
