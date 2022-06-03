@@ -17,7 +17,7 @@ function App(): JSX.Element {
           <Route path="/" element={<Main setClientId={setClientId} setMergedData = {setMergedData}/>}></Route>
           <Route
             path={`/clients/${clientId}`}
-            element={<ClientPage clientId={clientId} />}
+            element={<ClientPage clientId={clientId} mergedData = {mergedData} />}
           ></Route>
         </Routes>
       </BrowserRouter>
