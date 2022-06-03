@@ -1,5 +1,4 @@
 import { singleProject } from "../utils/Interfaces";
-import { employeeLength } from "../utils/employeeLength";
 import { useNavigate } from "react-router-dom";
 
 interface iProps {
@@ -47,7 +46,7 @@ export default function Table(props: iProps): JSX.Element {
                       >
                         {employee.name}
                       </li>
-                    ))
+                    )) 
                   : "None"}
               </td>
               <td>{project.startDate}</td>
