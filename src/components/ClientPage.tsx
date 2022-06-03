@@ -1,5 +1,7 @@
 import { mergedData } from "../utils/Interfaces";
 import { employeeLength } from "../utils/employeeLength";
+import {useNavigate} from "react-router-dom"
+
 
 interface iProps {
   clientId: string;
@@ -7,6 +9,8 @@ interface iProps {
 }
 
 export default function ClientPage(props: iProps): JSX.Element {
+  const navigate = useNavigate();
+  
   const clientData = props.mergedData?.clients.find(
     (client) => client.id === props.clientId
   );
@@ -38,6 +42,7 @@ export default function ClientPage(props: iProps): JSX.Element {
 
   return (
     <>
+    <button onClick={()=>navigate(-1)}>Go Back To Dash Board</button>
       <h1>Client: {clientData?.name}</h1>
       <div>
         <table>
