@@ -19,7 +19,7 @@ function App(): JSX.Element {
           <Route
             path="/"
             element={
-              <Main setClientId={setClientId} setMergedData={setMergedData} />
+              <Main setClientId={setClientId} setMergedData={setMergedData} setEmployeeId = {setEmployeeId} />
             }
           ></Route>
           <Route

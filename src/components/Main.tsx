@@ -51,6 +51,7 @@ const reducer = (state: singleProject[], action: any) => {
 interface iProps {
   setClientId: React.Dispatch<React.SetStateAction<string>>;
   setMergedData: React.Dispatch<React.SetStateAction<mergedData | undefined>>;
+  setEmployeeId: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function Main(props: iProps): JSX.Element {
@@ -128,7 +129,7 @@ export default function Main(props: iProps): JSX.Element {
             Search
           </button>
         )}
-        <Table data={filteredData} setClientId={props.setClientId} />
+        <Table data={filteredData} setClientId={props.setClientId} setEmployeeId = {props.setEmployeeId}/>
       </div>
     </>
   );

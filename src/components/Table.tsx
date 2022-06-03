@@ -5,13 +5,11 @@ import { useNavigate } from "react-router-dom";
 interface iProps {
   data: singleProject[];
   setClientId: React.Dispatch<React.SetStateAction<string>>;
+  setEmployeeId: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function Table(props: iProps): JSX.Element {
-  const navigate = useNavigate();
-
-  console.log(props.data.map((data) => data.employees[0] !== undefined && console.log(data.employees[0].name, "employees")))
-  
+  const navigate = useNavigate();  
   
   
   return (
@@ -41,12 +39,12 @@ export default function Table(props: iProps): JSX.Element {
               <td>
                 {project.employees[0] !== undefined
                   ? project.employees.map((employee, id) => (
-                      <li key={id} onClick={()=> console.log(employee)}>{employee.name}</li>
+                      <li key={id} onClick={()=> props.setEmployeeId(employee.id)}>{employee.name}</li>
                     ))
                   : "None"}
               </td>
               <td>{project.startDate}</td>
-              <td>{project.endDate}</td>
+              <td>{project.endDate}</td> 
               <td>{project.size}</td>
             </tr>
           </table>
