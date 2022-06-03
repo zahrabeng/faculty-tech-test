@@ -32,7 +32,7 @@ export interface singleProject {
   projectId: string;
   client: string;
   clientId: string;
-  employees: (string | undefined)[];
+  employees: { id: string; name: string }[];
   startDate: string;
   endDate: string;
   size: string;

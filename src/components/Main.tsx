@@ -23,7 +23,7 @@ const reducer = (state: singleProject[], action: any) => {
     case "Employee": {
       const employees = state.filter((project) => project.employees.length > 0);
       return employees.filter((project) =>
-        project.employees[0]!.includes(action.payload.search)
+        project.employees[0].name!.includes(action.payload.search)
       );
     }
 
@@ -59,11 +59,6 @@ export default function Main(props: iProps): JSX.Element {
   const [selector, setSelector] = useState("Search By...");
   const baseURL = "https://consulting-projects.academy-faculty.repl.co/api/";
 
-  console.log(
-    filteredData.filter(
-      (project: singleProject) => project.employees.length > 0
-    )
-  );
 
   useEffect(() => {
     async function getAllData() {
@@ -87,12 +82,12 @@ export default function Main(props: iProps): JSX.Element {
           const employee = mergedData.employees.find(
             (employee: employees) => employeeId === employee.id
           );
-          singleProject.push(employee?.name);
+          singleProject.push({id: employeeId, name:employee!.name}); 
         }
         reformattedData.push({
           projectId: project.id,
           client: client!.name,
-          clientId: project.clientId,
+          clientId: project.clientId, 
           employees: singleProject,
           startDate: project.contract.startDate,
           endDate: project.contract.endDate,

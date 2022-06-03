@@ -10,6 +10,10 @@ interface iProps {
 export default function Table(props: iProps): JSX.Element {
   const navigate = useNavigate();
 
+  console.log(props.data.map((data) => data.employees[0] !== undefined && console.log(data.employees[0].name, "employees")))
+  
+  
+  
   return (
     <>
       {console.log(props.data)}
@@ -35,9 +39,9 @@ export default function Table(props: iProps): JSX.Element {
                 {project.client}
               </td>
               <td>
-                {employeeLength(project.employees)
+                {project.employees[0] !== undefined
                   ? project.employees.map((employee, id) => (
-                      <li key={id}>{employee}</li>
+                      <li key={id} onClick={()=> console.log(employee)}>{employee.name}</li>
                     ))
                   : "None"}
               </td>
@@ -46,6 +50,7 @@ export default function Table(props: iProps): JSX.Element {
               <td>{project.size}</td>
             </tr>
           </table>
+          
         </div>
       ))}
     </>
