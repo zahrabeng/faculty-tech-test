@@ -30,11 +30,10 @@ export default function ClientPage(props: iProps): JSX.Element {
 
   }
 
-  const removeDuplicates = singleProject.filter( function( item, index, inputArray ) {
+  const noDuplicatesEmployees = singleProject.filter( function( item, index, inputArray ) {
     return inputArray.indexOf(item) == index;
 });
 
-console.log(removeDuplicates)
 
   return (
     <>
@@ -45,7 +44,7 @@ console.log(removeDuplicates)
             <th>Employees that have worked with {clientData?.name}</th>
           </tr>
           <tr>
-         
+         {employeeLength(noDuplicatesEmployees) ? <td>{noDuplicatesEmployees.map((employee, id) => <li key ={id}>{employee}</li>)}</td>:<td>None</td>}
           </tr>
         </table>
       </div>
