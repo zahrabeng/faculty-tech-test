@@ -20,6 +20,7 @@ export default function ClientPage(props: iProps): JSX.Element {
   console.log(clientProjects);
 
   const singleProject = [];
+  // eslint-disable-next-line
   for (const project of clientProjects!) {
     if (employeeLength(project.employeeIds)) {
       for (const employeeId of project.employeeIds) {
@@ -36,7 +37,7 @@ export default function ClientPage(props: iProps): JSX.Element {
     index,
     inputArray
   ) {
-    return inputArray.indexOf(item) == index;
+    return inputArray.indexOf(item) === index;
   });
 
   return (

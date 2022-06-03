@@ -10,6 +10,7 @@ import { mergedData } from "../utils/Interfaces";
 import Header from "./Header";
 import Table from "./Table";
 
+// eslint-disable-next-line
 const reducer = (state: singleProject[], action: any) => {
   switch (action.type) {
     case "initial_data":
@@ -23,7 +24,7 @@ const reducer = (state: singleProject[], action: any) => {
     case "Employee": {
       const employees = state.filter((project) => project.employees.length > 0);
       return employees.filter((project) =>
-        project.employees[0].name!.includes(action.payload.search)
+        project.employees[0].name.includes(action.payload.search)
       );
     }
 
@@ -43,7 +44,6 @@ const reducer = (state: singleProject[], action: any) => {
       );
 
     default:
-    case "initial_data":
       return action.payload;
   }
 };
@@ -73,7 +73,7 @@ export default function Main(props: iProps): JSX.Element {
       props.setMergedData(mergedData);
 
       const reformattedData: singleProject[] = [];
-      mergedData.projects.map((project: project) => {
+      mergedData.projects.forEach((project: project) => {
         const client = mergedData.clients.find(
           (client: client) => client.id === project.clientId
         );
@@ -82,10 +82,12 @@ export default function Main(props: iProps): JSX.Element {
           const employee = mergedData.employees.find(
             (employee: employees) => employeeId === employee.id
           );
+          // eslint-disable-next-line
           singleProject.push({ id: employeeId, name: employee!.name });
         }
         reformattedData.push({
           projectId: project.id,
+          // eslint-disable-next-line
           client: client!.name,
           clientId: project.clientId,
           employees: singleProject,
@@ -101,6 +103,7 @@ export default function Main(props: iProps): JSX.Element {
     }
 
     getAllData();
+    // eslint-disable-next-line
   }, [searchText]);
 
   console.log(selector);

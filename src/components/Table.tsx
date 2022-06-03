@@ -46,7 +46,7 @@ export default function Table(props: iProps): JSX.Element {
                       >
                         {employee.name}
                       </li>
-                    )) 
+                    ))
                   : "None"}
               </td>
               <td>{project.startDate}</td>
