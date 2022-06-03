@@ -1,4 +1,12 @@
-export default function EmployeePage():JSX.Element{
+import { mergedData } from "../utils/Interfaces";
+
+interface iProps {
+    employeeId: string;
+    mergedData: mergedData | undefined;
+  }
+
+export default function EmployeePage(props:iProps):JSX.Element{
+
     return(
         <>
         </>
