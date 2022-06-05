@@ -24,9 +24,13 @@ export default function EmployeePage(props: iProps): JSX.Element {
     <>
       <button onClick={() => navigate(-1)}>Go Back To Dash Board</button>
 
-      <h1>Employee: {employeeData?.name}</h1>
-      <h3>Role: {employeeData?.role}</h3>
-      <img src={employeeData?.avatar} alt="employee avatar"></img>
+      <h1 className="component-page-title">Employee: {employeeData?.name}</h1>
+      <h3 className="employee-role">Role: {employeeData?.role}</h3>
+      <img
+        src={employeeData?.avatar}
+        alt="employee avatar"
+        className="employee-img"
+      ></img>
 
       <div>
         <table>
@@ -36,7 +40,9 @@ export default function EmployeePage(props: iProps): JSX.Element {
           <tr>
             <td>
               {projects?.map((project) => (
-                <li key={project.id}>{project.id}</li>
+                <li key={project.id} className="list-view">
+                  {project.id}
+                </li>
               ))}
             </td>
           </tr>

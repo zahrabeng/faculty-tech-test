@@ -43,7 +43,7 @@ export default function ClientPage(props: iProps): JSX.Element {
   return (
     <>
       <button onClick={() => navigate(-1)}>Go Back To Dash Board</button>
-      <h1>Client: {clientData?.name}</h1>
+      <h1 className="component-page-title">Client: {clientData?.name}</h1>
       <div>
         <table>
           <tr>
@@ -53,7 +53,9 @@ export default function ClientPage(props: iProps): JSX.Element {
             {employeeLength(noDuplicatesEmployees) ? (
               <td>
                 {noDuplicatesEmployees.map((employee, id) => (
-                  <li key={id}>{employee}</li>
+                  <li key={id} className="list-view">
+                    {employee}
+                  </li>
                 ))}
               </td>
             ) : (
@@ -63,14 +65,16 @@ export default function ClientPage(props: iProps): JSX.Element {
         </table>
       </div>
       <div>
-        <table>
+        <table className="client-project-table">
           <tr>
             <th>Projects for {clientData?.name}</th>
           </tr>
           <tr>
             <td>
               {clientProjects?.map((project, id) => (
-                <li key={id}>{project.id}</li>
+                <li key={id} className="list-view">
+                  {project.id}
+                </li>
               ))}
             </td>
           </tr>

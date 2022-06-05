@@ -2,7 +2,7 @@ export default function Header(): JSX.Element {
   return (
     <>
       <nav>
-        <p>Faculty Dashboard</p>
+        <p className="main-title">Faculty Dashboard</p>
       </nav>
     </>
   );

@@ -1,5 +1,8 @@
 body{
     font-family: 'Courier New', Courier, monospace;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    background-color: #b8b8b8;
+
 }
 
 .data-table{
@@ -25,3 +28,56 @@ tr{
     
 } 
 
+.main-title{
+    font-size: 40px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight:bold;
+    color: #0a3a41;
+    text-shadow:2px 2px #6e6e6e;
+
+}
+
+.search-container{
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.click-table{
+    margin-bottom: 5px;
+}
+
+.click-table:hover{
+    font-weight: bold;
+    cursor: pointer;
+    color:#0a3a41;
+    font-size: larger;
+}
+
+.component-page-title{
+    text-align: center;
+    color: #0a3a41;
+    text-decoration: underline;
+}
+
+.list-view{
+    margin-bottom: 10px;
+}
+
+.employee-role{
+    text-align: center;
+    color: #3e7e88;
+}
+
+.employee-img{
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 5px;
+    box-shadow: 4px 2px 17px 7px rgba(0,0,0,0.57);
+}
+
+.client-project-table{
+    margin-top: 20px;
+}

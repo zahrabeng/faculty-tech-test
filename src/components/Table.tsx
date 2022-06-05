@@ -31,6 +31,7 @@ export default function Table(props: iProps): JSX.Element {
                   props.setClientId(project.clientId);
                   navigate(`/clients/${project.clientId}`);
                 }}
+                className="click-table"
               >
                 {project.client}
               </td>
@@ -43,6 +44,7 @@ export default function Table(props: iProps): JSX.Element {
                           props.setEmployeeId(employee.id);
                           navigate(`/employees/${employee.id}`);
                         }}
+                        className="click-table"
                       >
                         {employee.name}
                       </li>

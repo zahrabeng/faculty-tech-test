@@ -113,7 +113,10 @@ export default function Main(props: iProps): JSX.Element {
     <>
       <Header />
       <div className="search-container">
-        <input onChange={(e) => setSearchText(e.target.value)}></input>
+        <input
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search..."
+        ></input>
         <select onChange={(e) => setSelector(e.target.value)} value={selector}>
           <option>Search By...</option>
           <option>Client</option>
@@ -131,12 +134,12 @@ export default function Main(props: iProps): JSX.Element {
             Search
           </button>
         )}
-        <Table
-          data={filteredData}
-          setClientId={props.setClientId}
-          setEmployeeId={props.setEmployeeId}
-        />
       </div>
+      <Table
+        data={filteredData}
+        setClientId={props.setClientId}
+        setEmployeeId={props.setEmployeeId}
+      />
     </>
   );
 }
